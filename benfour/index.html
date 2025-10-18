@@ -9,225 +9,283 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
-        
+
         body {
             background-color: #f5f7fa;
             color: #333;
-            transition: all 0.3s ease;
+            transition: margin-left 0.3s ease;
         }
-        
-        /* 导航栏样式 */
-        .navbar {
+
+        /* 顶部导航栏样式 */
+        .top-nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 60px;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             padding: 0 20px;
             z-index: 1000;
         }
-        
+
         /* 汉堡菜单按钮 */
         .menu-toggle {
             width: 40px;
             height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-radius: 5px;
-            padding: 5px;
+            margin-right: 20px;
         }
-        
+
         .menu-toggle:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
         }
-        
+
         .menu-toggle span {
             display: block;
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            margin: 3px 0;
+            width: 20px;
+            height: 2px;
+            background: white;
+            margin: 2px 0;
             transition: all 0.3s ease;
-            border-radius: 2px;
+            transform-origin: center;
         }
-        
+
         /* 侧边栏样式 */
         .sidebar {
             position: fixed;
-            top: 60px;
-            left: -250px;
-            width: 250px;
-            height: calc(100vh - 60px);
-            background-color: white;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: white;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            overflow-y: auto;
+            transition: left 0.3s ease;
             z-index: 999;
+            overflow-y: auto;
+            padding-top: 70px;
         }
-        
+
         .sidebar.active {
             left: 0;
         }
-        
-        .sidebar ul {
+
+        /* 侧边栏内容 */
+        .sidebar-content {
+            padding: 20px;
+        }
+
+        .sidebar-header {
+            padding: 0 0 20px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h3 {
+            color: #2c3e50;
+            font-size: 1.4rem;
+        }
+
+        .sidebar-menu {
             list-style: none;
-            padding: 20px 0;
         }
-        
-        .sidebar ul li {
-            padding: 0;
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
         }
-        
-        .sidebar ul li a {
-            display: block;
-            padding: 15px 25px;
-            text-decoration: none;
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
             color: #555;
-            font-weight: 500;
+            text-decoration: none;
+            border-radius: 5px;
             transition: all 0.2s ease;
-            border-left: 3px solid transparent;
         }
-        
-        .sidebar ul li a:hover {
-            background-color: #f0f5ff;
-            color: #2575fc;
-            border-left: 3px solid #2575fc;
+
+        .sidebar-menu a:hover {
+            background: #f0f5ff;
+            color: #3498db;
         }
-        
-        .sidebar ul li a.active {
-            background-color: #e6f0ff;
-            color: #2575fc;
-            border-left: 3px solid #2575fc;
+
+        .sidebar-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
         }
-        
+
         /* 主内容区域 */
-        .content {
+        .main-content {
             margin-top: 60px;
             padding: 30px;
             transition: all 0.3s ease;
         }
-        
-        .content.shifted {
-            margin-left: 250px;
+
+        .content-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
         }
-        
+
         h1 {
             color: #2c3e50;
             margin-bottom: 20px;
         }
-        
-        .card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            padding: 25px;
-            margin-bottom: 25px;
-        }
-        
+
         p {
             line-height: 1.6;
-            color: #555;
             margin-bottom: 15px;
+            color: #555;
         }
-        
-        /* 响应式调整 */
+
+        /* 侧边栏激活时主内容偏移 */
+        body.sidebar-active {
+            margin-left: 280px;
+        }
+
+        /* 响应式设计 */
         @media (max-width: 768px) {
-            .content.shifted {
+            .sidebar {
+                width: 250px;
+            }
+            
+            body.sidebar-active {
                 margin-left: 0;
             }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+
+        /* 遮罩层 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="menu-toggle" id="menuToggle">
+    <!-- 顶部导航栏 -->
+    <nav class="top-nav">
+        <button class="menu-toggle" id="menuToggle">
             <span></span>
             <span></span>
             <span></span>
-        </div>
-        <h2 style="color: white; margin-left: 15px;">网站标题</h2>
+        </button>
+        <h2 style="color: white;">网站标题</h2>
     </nav>
-    
+
     <!-- 侧边栏 -->
     <aside class="sidebar" id="sidebar">
-        <ul>
-            <li><a href="#" class="active">首页</a></li>
-            <li><a href="#">产品介绍</a></li>
-            <li><a href="#">服务项目</a></li>
-            <li><a href="#">关于我们</a></li>
-            <li><a href="#">新闻动态</a></li>
-            <li><a href="#">成功案例</a></li>
-            <li><a href="#">联系我们</a></li>
-        </ul>
-    </aside>
-    
-    <!-- 主内容区域 -->
-    <main class="content" id="content">
-        <div class="card">
-            <h1>欢迎来到我们的网站</h1>
-            <p>这是一个带有可折叠侧边栏导航的页面示例。点击左上角的菜单按钮可以打开或关闭侧边栏。</p>
-            <p>侧边栏包含主要的导航链接，当侧边栏打开时，主内容区域会相应地向右侧移动。</p>
-            <p>在移动设备上，侧边栏会覆盖在内容上方，而不是推动内容。</p>
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <h3>导航菜单</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#"><i>🏠</i> 首页</a></li>
+                <li><a href="#"><i>📄</i> 文章</a></li>
+                <li><a href="#"><i>🖼️</i> 图库</a></li>
+                <li><a href="#"><i>📊</i> 数据</a></li>
+                <li><a href="#"><i>👤</i> 个人中心</a></li>
+                <li><a href="#"><i>⚙️</i> 设置</a></li>
+                <li><a href="#"><i>❓</i> 帮助</a></li>
+                <li><a href="#"><i>📞</i> 联系我们</a></li>
+            </ul>
         </div>
-        
-        <div class="card">
-            <h2>功能特点</h2>
-            <p>• 平滑的动画过渡效果</p>
-            <p>• 响应式设计，适配各种屏幕尺寸</p>
-            <p>• 优雅的视觉设计</p>
-            <p>• 易于自定义和扩展</p>
+    </aside>
+
+    <!-- 遮罩层 -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <div class="content-card">
+            <h1>欢迎使用可折叠侧边栏</h1>
+            <p>这是一个具有现代化设计的响应式网页布局，左上角的汉堡菜单按钮可以控制侧边栏的展开和收起。</p>
+            <p>侧边栏采用了平滑的动画效果，并且在移动设备上具有良好的适配性。点击左上角的菜单按钮或页面遮罩可以切换侧边栏的显示状态。</p>
+            <p>您可以根据实际需求修改侧边栏中的菜单项和样式，以适应您的网站设计。</p>
         </div>
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
-            const sidebar = document.getElementById('sidebar');
-            const content = document.getElementById('content');
+        // 获取DOM元素
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const body = document.body;
+
+        // 切换侧边栏函数
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            body.classList.toggle('sidebar-active');
             
-            // 切换侧边栏状态
-            menuToggle.addEventListener('click', function() {
-                sidebar.classList.toggle('active');
-                content.classList.toggle('shifted');
-                
-                // 为汉堡菜单添加动画效果
-                const spans = menuToggle.querySelectorAll('span');
-                if (sidebar.classList.contains('active')) {
-                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                    spans[1].style.opacity = '0';
-                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-                } else {
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
-                }
-            });
-            
-            // 点击内容区域关闭侧边栏（移动设备）
-            content.addEventListener('click', function() {
-                if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
-                    sidebar.classList.remove('active');
-                    content.classList.remove('shifted');
-                    
-                    // 重置汉堡菜单
-                    const spans = menuToggle.querySelectorAll('span');
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
-                }
-            });
+            // 为汉堡菜单按钮添加动画效果
+            const spans = menuToggle.querySelectorAll('span');
+            if (sidebar.classList.contains('active')) {
+                // 侧边栏展开时的动画
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                // 侧边栏收起时的动画
+                spans[0].style.transform = 'rotate(0) translate(0, 0)';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'rotate(0) translate(0, 0)';
+            }
+        }
+
+        // 添加事件监听器
+        menuToggle.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // 添加键盘支持：按ESC键关闭侧边栏
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && sidebar.classList.contains('active')) {
+                toggleSidebar();
+            }
         });
+
+        // 窗口大小变化时调整布局
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                // 在大屏幕上，侧边栏打开时不需要遮罩
+                overlay.style.display = 'none';
+            } else {
+                overlay.style.display = 'block';
+            }
+        });
+
+        // 初始化
+        window.dispatchEvent(new Event('resize'));
     </script>
 </body>
 </html>
