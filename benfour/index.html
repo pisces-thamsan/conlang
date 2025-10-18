@@ -1,197 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>可折叠侧边栏导航</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-        }
-
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            transition: margin-left 0.3s ease;
-        }
-
-        /* 顶部导航栏样式 */
-        .top-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            z-index: 1000;
-        }
-
-        /* 汉堡菜单按钮 */
-        .menu-toggle {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-right: 20px;
-        }
-
-        .menu-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background: white;
-            margin: 2px 0;
-            transition: all 0.3s ease;
-            transform-origin: center;
-        }
-
-        /* 侧边栏样式 */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 280px;
-            height: 100vh;
-            background: white;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            transition: left 0.3s ease;
-            z-index: 999;
-            overflow-y: auto;
-            padding-top: 70px;
-        }
-
-        .sidebar.active {
-            left: 0;
-        }
-
-        /* 侧边栏内容 */
-        .sidebar-content {
-            padding: 20px;
-        }
-
-        .sidebar-header {
-            padding: 0 0 20px 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 20px;
-        }
-
-        .sidebar-header h3 {
-            color: #2c3e50;
-            font-size: 1.4rem;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-        }
-
-        .sidebar-menu li {
-            margin-bottom: 5px;
-        }
-
-        .sidebar-menu a {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            color: #555;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.2s ease;
-        }
-
-        .sidebar-menu a:hover {
-            background: #f0f5ff;
-            color: #3498db;
-        }
-
-        .sidebar-menu a i {
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-        }
-
-        /* 主内容区域 */
-        .main-content {
-            margin-top: 60px;
-            padding: 30px;
-            transition: all 0.3s ease;
-        }
-
-        .content-card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        p {
-            line-height: 1.6;
-            margin-bottom: 15px;
-            color: #555;
-        }
-
-        /* 侧边栏激活时主内容偏移 */
-        body.sidebar-active {
-            margin-left: 280px;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 250px;
-            }
-            
-            body.sidebar-active {
-                margin-left: 0;
-            }
-            
-            .main-content {
-                padding: 20px;
-            }
-        }
-
-        /* 遮罩层 */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-    </style>
+    <title>本弗尔语教程（测试）</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:400,500,600,700&display=swap">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Times+New+Roman&display=swap">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Georgia&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="table.css">
+    <script src="sentence.js"></script>
+    <script src="leipzig.js"></script>
 </head>
+
 <body>
     <!-- 顶部导航栏 -->
     <nav class="top-nav">
@@ -200,7 +22,7 @@
             <span></span>
             <span></span>
         </button>
-        <h2 style="color: white;">网站标题</h2>
+        <h2 style="color: white;">首页 &bull; 本弗尔语简明教程</h2>
     </nav>
 
     <!-- 侧边栏 -->
@@ -232,60 +54,28 @@
             <p>这是一个具有现代化设计的响应式网页布局，左上角的汉堡菜单按钮可以控制侧边栏的展开和收起。</p>
             <p>侧边栏采用了平滑的动画效果，并且在移动设备上具有良好的适配性。点击左上角的菜单按钮或页面遮罩可以切换侧边栏的显示状态。</p>
             <p>您可以根据实际需求修改侧边栏中的菜单项和样式，以适应您的网站设计。</p>
+            <p>这是上一段的文字，莱比锡注释相比于正文应缩进30px</p>
+
+            <p>这是文档中的一段文字，您可以通过在HTML中添加带有特定ID的div来自动插入莱比锡注释表格。</p>
+
+            <!-- 示例：通过添加<div id="leipzig_1"></div>自动插入拉丁语注释表格 -->
+            <div id="leipzig_1"></div>
+
+            <p>这是文档中的另一段文字，您可以根据需要插入多个注释表格。</p>
+
+            <!-- 示例：通过添加<div id="leipzig_2"></div>自动插入西班牙语注释表格 -->
+            <div id="leipzig_2"></div>
+
+            <p>您还可以添加其他语言的注释表格，只需在HTML中添加对应的div标记即可。</p>
+
+            <!-- 示例：通过添加<div id="leipzig_3"></div>自动插入土耳其语注释表格 -->
+            <div id="leipzig_3"></div>
+
+            <p>这样，您就可以在文档中灵活地插入各种语言的莱比锡注释表格了。</p>
         </div>
     </main>
 
-    <script>
-        // 获取DOM元素
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const body = document.body;
+    <script src="sidebar.js"></script>
 
-        // 切换侧边栏函数
-        function toggleSidebar() {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-            body.classList.toggle('sidebar-active');
-            
-            // 为汉堡菜单按钮添加动画效果
-            const spans = menuToggle.querySelectorAll('span');
-            if (sidebar.classList.contains('active')) {
-                // 侧边栏展开时的动画
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-            } else {
-                // 侧边栏收起时的动画
-                spans[0].style.transform = 'rotate(0) translate(0, 0)';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'rotate(0) translate(0, 0)';
-            }
-        }
-
-        // 添加事件监听器
-        menuToggle.addEventListener('click', toggleSidebar);
-        overlay.addEventListener('click', toggleSidebar);
-
-        // 添加键盘支持：按ESC键关闭侧边栏
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && sidebar.classList.contains('active')) {
-                toggleSidebar();
-            }
-        });
-
-        // 窗口大小变化时调整布局
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                // 在大屏幕上，侧边栏打开时不需要遮罩
-                overlay.style.display = 'none';
-            } else {
-                overlay.style.display = 'block';
-            }
-        });
-
-        // 初始化
-        window.dispatchEvent(new Event('resize'));
-    </script>
 </body>
 </html>
